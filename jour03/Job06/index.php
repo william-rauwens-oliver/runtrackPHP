@@ -1,13 +1,28 @@
 <?php
-function leetSpeak($str){
-    $str = str_replace(['a', 'A'], '4', $str);
-    $str = str_replace(['b', 'B'], '8', $str);
-    $str = str_replace(['e', 'E'], '3', $str);
-    $str = str_replace(['g', 'G'], '6', $str);
-    $str = str_replace(['l', 'L'], '1', $str);
-    $str = str_replace(['s', 'S'], '5', $str);
-    $str = str_replace(['t', 'T'], '7', $str);
-    return $str;
+function leetSpeak($str) {
+    $leetTable = array(
+        'A' => '4',
+        'a' => '4',
+        'B' => '8',
+        'b' => '8',
+        'E' => '3',
+        'e' => '3',
+        'G' => '6',
+        'g' => '6',
+        'L' => '1',
+        'l' => '1',
+        'S' => '5',
+        's' => '5',
+        'T' => '7',
+        't' => '7'
+    );
+    
+    $leetStr = strtr($str, $leetTable);
+    
+    return $leetStr;
 }
-echo leetSpeak("I am a champion");
+
+$input = "Hello World";
+$output = leetSpeak($input);
+echo $output;
 ?>
