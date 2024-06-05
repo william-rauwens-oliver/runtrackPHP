@@ -1,52 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Produits</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Liste des Produits</h1>
+
 <?php
-// Fonction pour appliquer la réduction
-function appliquer_reduction($prix) {
+function calculerReduction($prix) {
     if ($prix > 100) {
-        return $prix * 0.9; // Réduction de 10%
+        return $prix * 0.1; 
     } else {
-        return $prix;
+        return 0;
     }
 }
 
-// Fonction pour créer un produit
-function creer_produit($nom, $prix, $quantite) {
-    return array('nom' => $nom, 'prix' => $prix, 'quantite' => $quantite);
-}
-
-// Fonction pour créer une liste de produits avec réduction
-function creer_liste_produits() {
-    $produits = array(
-        creer_produit("Ordinateur portable", 120, 2),
-        creer_produit("Téléphone", 80, 3),
-        creer_produit("Casque audio", 50, 5),
-        creer_produit("Écran 27 pouces", 200, 1)
-    );
-    foreach ($produits as &$produit) {
-        $produit['prix'] = appliquer_reduction($produit['prix']);
-    }
-    return $produits;
-}
-
-// Fonction pour générer une page HTML
-function generer_page_html($produits) {
-    $html = "<html><head><title>Liste des produits</title></head><body>";
-    $html .= "<h1>Liste des produits</h1>";
-    $html .= "<table border='1'><tr><th>Nom</th><th>Prix</th><th>Quantité</th></tr>";
+function genererTableauProduits($produits) {
+    $html = "<table>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prix</th>
+                    <th>Quantité</th>
+                    <th>Réduction</th>
+                    <th>Prix après réduction</th>
+                </tr>";
+    
     foreach ($produits as $produit) {
-        $html .= "<tr><td>{$produit['nom']}</td><td>{$produit['prix']} €</td><td>{$produit['quantite']}</td></tr>";
+        $reduction = calculerReduction($produit['prix']);
+        $prixApresReduction = $produit['prix'] - $reduction;
+        
+        $html .= "<tr>
+                    <td>{$produit['nom']}</td>
+                    <td>{$produit['prix']} €</td>
+                    <td>{$produit['quantite']}</td>
+                    <td>{$reduction} €</td>
+                    <td>{$prixApresReduction} €</td>
+                </tr>";
     }
-    $html .= "</table></body></html>";
+    
+    $html .= "</table>";
+    
     return $html;
 }
 
-// Appel des fonctions pour créer la liste de produits et générer la page HTML
-$liste_produits = creer_liste_produits();
-$page_html = generer_page_html($liste_produits);
+$produits = array(
+    array('nom' => 'Carte Graphique', 'prix' => 120, 'quantite' => 2),
+    array('nom' => 'Processeur', 'prix' => 80, 'quantite' => 1),
+    array('nom' => 'Ram', 'prix' => 150, 'quantite' => 3)
+);
 
-// Écriture du contenu HTML dans un fichier
-$file = fopen('liste_produits.html', 'w');
-fwrite($file, $page_html);
-fclose($file);
-
-echo "Fichier 'liste_produits.html' généré avec succès.";
+echo genererTableauProduits($produits);
 ?>
+
+</body>
+</html>
