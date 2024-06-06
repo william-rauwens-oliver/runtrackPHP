@@ -32,24 +32,18 @@
     height: 50px;
     text-align: center;
     font-size: 24px;
-  }
-  button {
-    width: 100%;
-    height: 100%;
-    font-size: 24px;
     background-color: #fff;
-    border: none;
     cursor: pointer;
     transition: background-color 0.3s;
   }
-  button:hover {
+  td:hover {
     background-color: #eee;
   }
   #resetBtn {
     margin-top: 20px;
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #4CAF50;
+    background-color: #007bff;
     color: white;
     border: none;
     cursor: pointer;
@@ -67,19 +61,19 @@
   <h1>Jeu du Morpion</h1>
   <table id="morpion">
     <tr>
-      <td><button onclick="placeSymbol(0, 0)">-</button></td>
-      <td><button onclick="placeSymbol(0, 1)">-</button></td>
-      <td><button onclick="placeSymbol(0, 2)">-</button></td>
+      <td onclick="placeSymbol(0, 0)">-</td>
+      <td onclick="placeSymbol(0, 1)">-</td>
+      <td onclick="placeSymbol(0, 2)">-</td>
     </tr>
     <tr>
-      <td><button onclick="placeSymbol(1, 0)">-</button></td>
-      <td><button onclick="placeSymbol(1, 1)">-</button></td>
-      <td><button onclick="placeSymbol(1, 2)">-</button></td>
+      <td onclick="placeSymbol(1, 0)">-</td>
+      <td onclick="placeSymbol(1, 1)">-</td>
+      <td onclick="placeSymbol(1, 2)">-</td>
     </tr>
     <tr>
-      <td><button onclick="placeSymbol(2, 0)">-</button></td>
-      <td><button onclick="placeSymbol(2, 1)">-</button></td>
-      <td><button onclick="placeSymbol(2, 2)">-</button></td>
+      <td onclick="placeSymbol(2, 0)">-</td>
+      <td onclick="placeSymbol(2, 1)">-</td>
+      <td onclick="placeSymbol(2, 2)">-</td>
     </tr>
   </table>
 
@@ -143,8 +137,8 @@ function resetGame() {
     ['', '', ''],
     ['', '', '']
   ];
-  let buttons = document.querySelectorAll('button');
-  buttons.forEach(button => button.innerHTML = '-');
+  let cells = document.querySelectorAll('td');
+  cells.forEach(cell => cell.innerHTML = '-');
 }
 </script>
 
