@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['prenom']) && !empty($
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reset'])) {
-    unset($_SESSION['prenoms']);
+    $_SESSION['prenoms'] = array();
     header("Location: ".$_SERVER['PHP_SELF']);
     exit;
 }
